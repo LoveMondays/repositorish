@@ -1,0 +1,23 @@
+language: ruby
+cache: bundler
+rvm:
+- 2.2
+- ruby-head
+git:
+  depth: 1
+script:
+- bundle exec rspec
+- bundle exec rubocop
+add_ons:
+  code_climate:
+    repo_token:
+      secure: S8SpUvj3QfLt+IpeupqWffChzlP+UcI9aOa5CMlhNq1VN7mK02fTWlAMc/hIOR7av8yUrljVynrafYp6c+oh2XZSw458Rs+OaERUcB8kvAdR2bGSfB7zHvVsu6CbEWLiDRdoDxuF8Au8G8lISAi8xqs4KxuXBLUzuYiFt0ZSPQP8+PqKoX8L7ksMq37Rcnp0DrmyRVK9jfbWKo8wW/WchsI0lZHwVty4NKQyGw9Z5kfiQfqcP6kqMU810dE/YOrSbEuYqMk/vIX1GNngvKygrXjTs9yJ/tY46gjgoy+lvOPKvM/LvgkbLMXZrBWjCb8peh4glJADfYGcXvGLqRozA3C+g1uAb4llaiPwiqGT9i+RFB/sWer4M5rmTNwv0fleo9iOylZFcSBtSTxcrOg5zubH9CrDPQOM/TnMSVor1LsDYd3D9OCeYIzPqDphYRtqAtr48jdzosRohCuHN0HmD2fMTuU80lZy75+HBlWdZgHG+8wG/IiNtuxe7/4XtMkR4zBb7GHhCtPq6AEf18TfHMxrTU/PwGe6lACiP7f0EY1lFDfhrEu634JatCIUWZcTMkJyjoPTKGEXXaKcnTpF+JbxyJRHZ5SfRfIfZ7aiVNP9aECpYHUX1pgh4NCWgkaDkyk+lvqQ5xGLZePf8sYxOW0ENCXynebar0NqUtBgHlY=
+deploy:
+  provider: rubygems
+  api_key:
+    secure: WutIgn21Jgy0Q3E/y47pALrxmyEEPMNWg7a0WEcGL72EfEhge0BG9FtiSds5uXbeA77PPQ4bNtZlkfv2wvm6ceJmQLO8HMnhqptZLAPTUqnyhlX9g2Cn0qHpm2heujlT2ORoE1+x4GB1f03OH3WaBliDat5hbd/CS0CJsZI9AJOo0TnbCJZ66E+TMfQAr+tDMDaBfNnWQAg0cXd3g2qfa1tmHnVhbpRahqgBxaC7XKYyHT7Y2TwSYePjc7yK/e9HxRF3zdBEGiq8tGFzvVSsT1NjujdJGyXRKRmDrl/yCHx5NwTXLVBuu/eitIP0zuVSIUrnSptU+Yo654DpVILzlLhdnuL5vhrl280YE3lrknYVh9udp2H9W7GKnCqRKEesUhNGHUHXsp1eBm+4h05B0ZiqYSKbNokeCwvG0aZpM13qa7mE1nnPa+gHznxk/Z0y5lzm9b/NNB2kzsp5tHTAi+ANedZ7K0nqk1gI3IMonUtujq8xe2sio0JQ7NGRp6zTL3eF3HJr6yTLxEYHfoXq7TNxPUX8BwskH24TAF0/HtRTSM47z5voBiGOUttFa1rTz+WmUu7V5cpgCFWjEfUiHgwDu35VmHZe8LWXclQFJU6mHm49p25asrnwxqTiFHG0hX31RaxwT4QhKOpB+y5PlELrPeQvpnrIE8z1jegcB98=
+  gem: warehouse
+  on:
+    tags: true
+    repo: LoveMondays/warehouse
+    branch: master
