@@ -1,0 +1,7 @@
+Metrics/LineLength:
+  Max: 110
+
+Style/Documentation:
+  Exclude:
+    - spec/**/*
+    - lib/warehouse/version.rb
