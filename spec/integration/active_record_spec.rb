@@ -19,9 +19,9 @@ RSpec.describe 'ActiveRecord integration' do
     end
 
     class UserRepository
-      include Warehouse
+      include Repositorish
 
-      warehouse :user, scope: :all
+      repositorish :user, scope: :all
 
       def confirmed
         where.not(confirmed_at: nil)
@@ -68,6 +68,6 @@ RSpec.describe 'ActiveRecord integration' do
   end
 
   it 'raises domain method error when directly calls domain methods' do
-    expect { UserRepository.alphabetically }.to raise_error(Warehouse::DomainMethodError)
+    expect { UserRepository.alphabetically }.to raise_error(Repositorish::DomainMethodError)
   end
 end

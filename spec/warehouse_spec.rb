@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'ostruct'
 
-RSpec.describe Warehouse do
+RSpec.describe Repositorish do
   before(:all) do
     class Model
       def new_record?; end
@@ -37,7 +37,7 @@ RSpec.describe Warehouse do
   end
 
   it "delegates calls on class to instance's defined domains" do
-    repository_class.warehouse :model, scope: :all
+    repository_class.repositorish :model, scope: :all
     expect(repository_class.custom_scope).to eq(repository_class.new(Model.all).custom_scope)
   end
 
@@ -46,27 +46,27 @@ RSpec.describe Warehouse do
     expect(Model).to receive(:all) { relation }
     expect(relation).to receive(:where).with(test: true)
 
-    repository_class.warehouse :model, scope: :all
+    repository_class.repositorish :model, scope: :all
     repository = repository_class.query
     repository.where(test: true)
   end
 
-  describe '.warehouse' do
+  describe '.repositorish' do
     subject { repository_class }
 
     it 'defines repository domain with the model passed if no option is passed' do
-      subject.warehouse :model
+      subject.repositorish :model
       expect(subject.instance_variable_get('@domain')).to eq(Model)
     end
 
     it 'defines repository domain with the model passed contextualized in the scope option' do
-      subject.warehouse :model, scope: :all
+      subject.repositorish :model, scope: :all
       expect(subject.instance_variable_get('@domain')).to eq(Model.all)
     end
   end
 
   describe '.create' do
-    subject { repository_class.warehouse(:model, scope: :all) }
+    subject { repository_class.repositorish(:model, scope: :all) }
 
     it 'does not create if the model is already persisted' do
       model = Model.new
@@ -84,7 +84,7 @@ RSpec.describe Warehouse do
   end
 
   describe '.update' do
-    subject { repository_class.warehouse(:model, scope: :all) }
+    subject { repository_class.repositorish(:model, scope: :all) }
 
     it 'does not update if the model is a new record' do
       model = Model.new
@@ -102,7 +102,7 @@ RSpec.describe Warehouse do
   end
 
   describe '.destroy' do
-    subject { repository_class.warehouse(:model, scope: :all) }
+    subject { repository_class.repositorish(:model, scope: :all) }
 
     it 'destroys if the model is already persisted' do
       model = Model.new
@@ -120,17 +120,17 @@ RSpec.describe Warehouse do
   end
 
   describe '.query' do
-    subject { repository_class.warehouse(:model, scope: :all) }
+    subject { repository_class.repositorish(:model, scope: :all) }
 
-    it 'returns a warehouse instance with configured domain' do
+    it 'returns a repositorish instance with configured domain' do
       query = subject.query
-      expect(query).to be_kind_of(Warehouse)
+      expect(query).to be_kind_of(Repositorish)
       expect(query.instance_variable_get('@domain')).to eq(Model.all)
     end
 
-    it 'returns a warehouse instance with custom domain passed as argument' do
+    it 'returns a repositorish instance with custom domain passed as argument' do
       query = subject.query(Model.where(test: true))
-      expect(query).to be_kind_of(Warehouse)
+      expect(query).to be_kind_of(Repositorish)
       expect(query.instance_variable_get('@domain')).to eq(Model.where(test: true))
     end
   end

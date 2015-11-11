@@ -4,4 +4,4 @@ Metrics/LineLength:
 Style/Documentation:
   Exclude:
     - spec/**/*
-    - lib/warehouse/version.rb
+    - lib/repositorish/version.rb

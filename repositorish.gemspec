@@ -1,17 +1,17 @@
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'warehouse/version'
+require 'repositorish/version'
 
 Gem::Specification.new do |s|
-  s.name        = 'warehouse'
-  s.version     = Warehouse::VERSION
+  s.name        = 'repositorish'
+  s.version     = Repositorish::VERSION
   s.platform    = Gem::Platform::RUBY
 
   s.date        = '2015-11-10'
   s.summary     = 'Simple Repository(ish) solution to hold query and ' \
                   'command logic into self contained objects'
-  s.homepage    = 'https://github.com/LoveMondays/warehouse'
+  s.homepage    = 'https://github.com/LoveMondays/repositorish'
   s.license     = 'MIT'
 
   s.authors     = ['Glauber Campinho', 'Brenno Costa']

@@ -1,5 +1,5 @@
 require 'active_support/core_ext/string/inflections'
-require 'warehouse/version'
+require 'repositorish/version'
 
 # Simple Repository(ish) solution to hold query and command logic into
 # self contained objects
@@ -8,9 +8,9 @@ require 'warehouse/version'
 #
 # ```ruby
 # class UserRepository
-#   include Warehouse
+#   include Repositorish
 #
-#   warehouse :user, scope: :all
+#   repositorish :user, scope: :all
 #
 #   def confirmed
 #     where.not(confirmed_at: nil)
@@ -20,8 +20,9 @@ require 'warehouse/version'
 # UserRepository.confirmed
 # # => <User::ActiveRecord_Relation ...>
 # ```
-module Warehouse
-  ACTIVE_RECORD_NAMESPACE_REGEX = /(?:^|::)ActiveRecord(?:_(?:Association)?Relation)?(?:$|::)/.freeze
+module Repositorish
+  CHAINABLE_NAMESPACES = %w(ActiveRecord ActiveRecord_Relation ActiveRecord_AssociationRelation)
+  CHAINABLE_NAMESPACES_REGEX = /(?:^|::)(?:#{CHAINABLE_NAMESPACES.join('|')})(?:$|::)/.freeze
 
   def self.included(base)
     base.send :extend, ClassMethods
@@ -54,14 +55,14 @@ module Warehouse
   end
 
   def chainable?(domain)
-    return true if ACTIVE_RECORD_NAMESPACE_REGEX =~ domain.class.to_s
+    return true if CHAINABLE_NAMESPACES_REGEX =~ domain.class.to_s
 
     domain.class == @domain.class
   end
 
   # :nodoc:
   module ClassMethods
-    def warehouse(model, options = {})
+    def repositorish(model, options = {})
       @domain = model.to_s.classify.constantize
       @domain = @domain.public_send(options[:scope]) if options[:scope]
       self
