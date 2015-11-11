@@ -46,10 +46,10 @@ RSpec.describe 'ActiveRecord integration' do
 
   it 'updates an existing user' do
     john = User.create(name: 'John')
-    john.last_sign_in_at = last_sign_in = 2.week.ago
+    john.name = 'John Will'
 
     expect(UserRepository.update(john)).to be true
-    expect(john.reload.last_sign_in_at).to eq(last_sign_in)
+    expect(john.reload.name).to eq('John Will')
   end
 
   it 'destroy an existing user' do
