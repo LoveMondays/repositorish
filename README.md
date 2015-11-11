@@ -1,5 +1,5 @@
-# Warehouse
-[![Build Status](https://travis-ci.org/LoveMondays/warehouse.svg)](https://travis-ci.org/LoveMondays/warehouse) [![Code Climate](https://codeclimate.com/github/LoveMondays/warehouse/badges/gpa.svg)](https://codeclimate.com/github/LoveMondays/warehouse) [![Test Coverage](https://codeclimate.com/github/LoveMondays/warehouse/badges/coverage.svg)](https://codeclimate.com/github/LoveMondays/warehouse/coverage)
+# Repositorish
+[![Build Status](https://travis-ci.org/LoveMondays/repositorish.svg)](https://travis-ci.org/LoveMondays/repositorish) [![Code Climate](https://codeclimate.com/github/LoveMondays/repositorish/badges/gpa.svg)](https://codeclimate.com/github/LoveMondays/repositorish) [![Test Coverage](https://codeclimate.com/github/LoveMondays/repositorish/badges/coverage.svg)](https://codeclimate.com/github/LoveMondays/repositorish/coverage)
 
 Simple Repository(ish) solution to hold query and command logic into self contained objects
 
@@ -8,7 +8,7 @@ Simple Repository(ish) solution to hold query and command logic into self contai
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'warehouse'
+gem 'repositorish'
 ```
 
 And then execute:
@@ -17,7 +17,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install warehouse
+    $ gem install repositorish
 
 ## Usage
 
@@ -29,9 +29,9 @@ end
 
 ```ruby
 class UserRepository
-  include Warehouse
+  include Repositorish
 
-  warehouse :user, scope: :all
+  repositorish :user, scope: :all
 
   def confirmed
     where.not(confirmed_at: nil)
@@ -74,7 +74,7 @@ end
   # => [#<User name: 'Mary'>]
 
   UserRepository.alphabetically
-  # => Warehouse::DomainMethodError: Direct call on domain's methods is not allowed
+  # => Repositorish::DomainMethodError: Direct call on domain's methods is not allowed
 
   UserRepository.active.destroy_all
   # => [#<User name: 'Mary'>]
@@ -91,7 +91,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-1. Fork it ( https://github.com/LoveMondays/warehouse/fork )
+1. Fork it ( https://github.com/LoveMondays/repositorish/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)

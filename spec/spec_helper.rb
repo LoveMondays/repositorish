@@ -7,7 +7,7 @@ if ENV['CODECLIMATE_REPO_TOKEN']
 end
 
 require 'rspec'
-require 'warehouse'
+require 'repositorish'
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 
 RSpec.configure do |config|
