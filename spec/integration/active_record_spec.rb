@@ -63,6 +63,7 @@ RSpec.describe 'ActiveRecord integration' do
     mary = User.create(name: 'Mary', last_sign_in_at: 1.day.ago, confirmed_at: 2.day.ago)
     john = User.create(name: 'John', last_sign_in_at: 2.week.ago, confirmed_at: 1.month.ago)
 
+    expect(UserRepository.active).to respond_to(:count)
     expect(UserRepository.confirmed).to contain_exactly(john, mary)
     expect(UserRepository.active).to contain_exactly(mary)
   end

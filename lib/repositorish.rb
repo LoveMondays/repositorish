@@ -60,6 +60,10 @@ module Repositorish
     domain.class == @domain.class
   end
 
+  def respond_to_missing?(method_name, include_private = false)
+    domain.respond_to?(method_name) || super
+  end
+
   # :nodoc:
   module ClassMethods
     def repositorish(model, options = {})
