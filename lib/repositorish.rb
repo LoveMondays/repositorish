@@ -21,8 +21,8 @@ require 'repositorish/version'
 # # => <User::ActiveRecord_Relation ...>
 # ```
 module Repositorish
-  CHAINABLE_NAMESPACES = %w(ActiveRecord ActiveRecord_Relation ActiveRecord_AssociationRelation)
-  CHAINABLE_NAMESPACES_REGEX = /(?:^|::)(?:#{CHAINABLE_NAMESPACES.join('|')})(?:$|::)/.freeze
+  CHAINABLE_NAMESPACES = %w(ActiveRecord ActiveRecord_Relation ActiveRecord_AssociationRelation).freeze
+  CHAINABLE_NAMESPACES_REGEX = /(?:^|::)(?:#{CHAINABLE_NAMESPACES.join('|')})(?:$|::)/
 
   def self.included(base)
     base.send :extend, ClassMethods
@@ -60,6 +60,10 @@ module Repositorish
     domain.class == @domain.class
   end
 
+  def respond_to_missing?(method_name, include_private = false)
+    domain.respond_to?(method_name) || super
+  end
+
   # :nodoc:
   module ClassMethods
     def repositorish(model, options = {})
@@ -93,7 +97,7 @@ module Repositorish
     def method_missing(method, *args, &block)
       return query.public_send(method, *args, &block) if method_defined?(method)
 
-      fail DomainMethodError, method if @domain.respond_to?(method)
+      raise DomainMethodError, method if @domain.respond_to?(method)
       super
     end
   end
