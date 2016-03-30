@@ -2,7 +2,7 @@ language: ruby
 cache: bundler
 rvm:
 - 2.2
-- ruby-head
+- 2.3
 git:
   depth: 1
 script:
